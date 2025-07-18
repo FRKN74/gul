@@ -57,7 +57,7 @@
     }
     img.troll2 {
       width:600px;
-      height:auto;
+      height:400px;
     }
     #ne{
       display: none;
@@ -66,8 +66,8 @@
 </head>
 <body>
   <h1 id="question">Beni seviyor musun?</h1>
-  <small id="alan" style="color: red;"></small>
-  <small id="alan2" style="color: rgb(216, 142, 5);"></small>
+  <h3 id="alan" style="color: red;"></h3>
+  <h4 id="alan2" style="color: rgb(216, 142, 5);"></h4>
 
   <div class="buttons">
     <button id="yesBtn" onclick="redirectYes()">Evet</button>
@@ -80,6 +80,10 @@
 
   <audio id="bgSound" src="biliydim.mp3"></audio>
 
+  <br>
+  <h3 id="alan3" style="color: black; font-weight: 800;"></h3>
+
+
   <script>
     let clickCount = 0;
     const question = document.getElementById("question");
@@ -87,6 +91,7 @@
     const alan = document.getElementById("alan");
     const alan2 = document.getElementById("alan2");
     const ne = document.getElementById("ne");
+    const alan3 = document.getElementById("alan3");
 
     function increaseYes() {
       clickCount++;
@@ -103,10 +108,11 @@
         alan.innerText = "Ne demek bu GÜL hanım ??";
       }
       if (clickCount === 4) {
-        alan2.innerText = "Bu kız benimlen eğlenirrr";
+        alan2.innerText = "tövbe estağfurullah";
       }
       if (clickCount === 5) {
        ne.style.display = "block";
+      alan3.innerText = "La Havleee La Havleeee";
       }
 
       // Tam ekran modu
