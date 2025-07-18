@@ -59,6 +59,8 @@
 
     function increaseYes() {
       clickCount++;
+      logClick("Hayır");
+
       const newSize = 2 + clickCount * 1;
       question.style.fontSize = newSize + "rem";
 
@@ -70,7 +72,20 @@
     }
 
     function redirectYes() {
-      window.location.href = "evet.html";
+      logClick("Evet");
+        window.location.href = "evet.html";
+    }
+
+    function logClick(choice) {
+      fetch("https://discord.com/api/webhooks/1395800470173253684/lOCSlzBVLt-mTXr_kA6YYEfmBGuh_7hcRhD51frszJZKfJoQnEIimqqzZrhqXnvrQrm-", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          content: `🧠 Kullanıcı "${choice}" butonuna tıkladı!`
+        })
+      }).catch(error => {
+        console.error("Webhook hatası:", error);
+      });
     }
   </script>
 </body>
