@@ -30,50 +30,101 @@
       padding: 10px 20px;
       margin: 0 10px;
       cursor: pointer;
+      transition: all 0.3s ease;
     }
 
-    .full-screen-yes {
-      font-size: 10rem !important;
-      color: red;
+    .full-screen-yes-button {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      font-size: 5rem !important;
+      margin: 0 !important;
+      border: none;
+      border-radius: 0;
+      background-color: red;
+      color: white;
+      z-index: 999;
       animation: pulse 1s infinite;
     }
+
 
     @keyframes pulse {
       0% { transform: scale(1); }
       50% { transform: scale(1.05); }
       100% { transform: scale(1); }
     }
+    img.troll2 {
+      width:600px;
+      height:auto;
+    }
+    #ne{
+      display: none;
+    }
   </style>
 </head>
 <body>
   <h1 id="question">Beni seviyor musun?</h1>
+  <small id="alan" style="color: red;"></small>
+  <small id="alan2" style="color: rgb(216, 142, 5);"></small>
 
   <div class="buttons">
-    <button onclick="redirectYes()">Evet</button>
+    <button id="yesBtn" onclick="redirectYes()">Evet</button>
     <button onclick="increaseYes()">Hayır</button>
   </div>
+
+  <div id="ne">
+    <img src="https://media1.tenor.com/m/EPLsFJtTfnAAAAAC/angry-angry-red.gif" class="troll2" alt="" srcset="">
+  </div>
+
+  <audio id="bgSound" src="biliydim.mp3"></audio>
 
   <script>
     let clickCount = 0;
     const question = document.getElementById("question");
+    const yesBtn = document.getElementById("yesBtn");
+    const alan = document.getElementById("alan");
+    const alan2 = document.getElementById("alan2");
+    const ne = document.getElementById("ne");
 
     function increaseYes() {
       clickCount++;
       logClick("Hayır");
 
-      const newSize = 2 + clickCount * 1;
-      question.style.fontSize = newSize + "rem";
+      // Evet butonunu büyüt
+      const newSize = 1 + clickCount * 0.3;
+      yesBtn.style.fontSize = `${newSize}rem`;
+      yesBtn.style.padding = `${10 + clickCount * 2}px ${20 + clickCount * 3}px`;
 
-      if (clickCount >= 5) {
-        question.textContent = "EVET";
-        question.classList.add("full-screen-yes");
+      // Emoji ekle
+      if (clickCount === 3) {
+        question.innerText = "Beni seviyor musun??? 😡";
+        alan.innerText = "Ne demek bu GÜL hanım ??";
+      }
+      if (clickCount === 4) {
+        alan2.innerText = "Bu kız benimlen eğlenirrr";
+      }
+      if (clickCount === 5) {
+       ne.style.display = "block";
+      }
+
+      // Tam ekran modu
+      if (clickCount >= 6) {
+        yesBtn.classList.add("full-screen-yes-button");
+        yesBtn.innerHTML = "Evet  <br> Demekki <b>Yalan<b>mışsınn!!";
         document.body.style.background = "#ffe6e6";
+        question.style.display = "none";
+        document.querySelector(".buttons").style.marginTop = "0";
+
+         const audio = document.getElementById("bgSound");
+      audio.play().catch(err => console.log("Ses oynatılamadı:", err));
       }
     }
 
     function redirectYes() {
-      logClick("Evet");
-        window.location.href = "evet.html";
+      logClick("Evet ----");
+      window.location.href = "evet.html";
     }
 
     function logClick(choice) {
